@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MAISON — Luxury Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════ RESET & ROOT ═══════════════ */
+:root {
+  --cream: #f5f0eb;
+  --cream-dark: #e8e0d6;
+  --ink: #1a1a1a;
+  --ink-soft: #3d3d3d;
+  --ink-light: #7a7a7a;
+  --gold: #c9a96e;
+  --gold-light: #dcc5a0;
+  --rose: #b5696a;
+  --border: #d6cfc6;
+  --card-bg: #ffffff;
+  --shadow: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,.12);
+  --radius: 4px;
+  --transition: .3s cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+img{max-width:100%}
+input,select,textarea{font-family:inherit}
+
+/* ═══════════════ NAV ═══════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  background:rgba(245,240,235,.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:var(--transition);
+}
+.nav-left,.nav-right{display:flex;align-items:center;gap:28px}
+.nav-link{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:400;cursor:pointer;
+  position:relative;padding-bottom:3px;
+  transition:var(--transition);
+}
+.nav-link::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--gold);transition:var(--transition);
+}
+.nav-link:hover{color:var(--ink)}
+.nav-link:hover::after{width:100%}
+.nav-link.active{color:var(--gold)}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;letter-spacing:8px;text-transform:uppercase;
+  color:var(--ink);cursor:pointer;
+}
+.nav-cart{
+  position:relative;font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;cursor:pointer;color:var(--ink-soft);
+  transition:var(--transition);
+}
+.nav-cart:hover{color:var(--ink)}
+.cart-badge{
+  position:absolute;top:-8px;right:-16px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--rose);color:#fff;
+  font-size:9px;display:flex;align-items:center;justify-content:center;
+  font-weight:600;
+}
+
+/* ═══════════════ PAGES ═══════════════ */
+.page{display:none;min-height:100vh;padding-top:68px}
+.page.active{display:block;animation:pgIn .4s var(--transition)}
+@keyframes pgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════ SHARED ═══════════════ */
+.container{max-width:1140px;margin:0 auto;padding:0 32px}
+.section-pad{padding:72px 0}
+.label-upper{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500}
+.serif-title{font-family:'Cormorant Garamond',serif;font-weight:300;color:var(--ink)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 32px;border:none;cursor:pointer;
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;
+  transition:var(--transition);
+}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--ink-soft);box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-light);color:var(--ink)}
+.divider{height:1px;background:var(--border);margin:24px 0}
+
+/* ═══════════════ HOME ═══════════════ */
+.hero{
+  height:calc(100vh - 68px);
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(160deg,#2a2420 0%,#1a1a1a 40%,#111 100%);
+}
+.hero-grain{
+  position:absolute;inset:0;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:256px 256px;
+}
+.hero-accent{
+  position:absolute;top:20%;left:-10%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.08) 0%,transparent 70%);
+}
+.hero-content{
+  position:relative;z-index:2;text-align:center;
+  animation:heroFade .8s .2s both;
+}
+@keyframes heroFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-content .label-upper{margin-bottom:20px;display:block}
+.hero-content h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(48px,8vw,88px);font-weight:300;
+  color:#fff;line-height:1.05;letter-spacing:-1px;margin-bottom:24px;
+}
+.hero-content h1 em{font-style:italic;color:var(--gold-light)}
+.hero-content p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300;max-width:440px;margin:0 auto 32px;line-height:1.7}
+.hero-scroll{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:rgba(255,255,255,.35);font-size:9px;letter-spacing:2px;text-transform:uppercase;
+}
+.hero-scroll .line{width:1px;height:32px;background:rgba(255,255,255,.2);animation:scrollPulse 2s infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* Category Strip */
+.cat-strip{
+  display:flex;justify-content:center;gap:0;
+  border-bottom:1px solid var(--border);
+}
+.cat-strip-item{
+  padding:18px 36px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--ink-light);cursor:pointer;transition:var(--transition);
+  border-right:1px solid var(--border);position:relative;
+}
+.cat-strip-item:last-child{border-right:none}
+.cat-strip-item:hover{color:var(--gold)}
+.cat-strip-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transition:var(--transition);
+}
+.cat-strip-item:hover::after{transform:scaleX(1)}
+
+/* Featured Grid */
+.featured-grid{
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:2px;
+  height:520px;
+}
+.feat-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  background:var(--ink);
+}
+.feat-card .bg{
+  position:absolute;inset:0;
+  transition:transform .6s var(--transition);
+}
+.feat-card:hover .bg{transform:scale(1.05)}
+.feat-card .bg-1{background:linear-gradient(180deg,#2c2420 0%,#1a1210 100%)}
+.feat-card .bg-2{background:linear-gradient(180deg,#1e2228 0%,#141618 100%)}
+.feat-card .bg-3{background:linear-gradient(180deg,#222020 0%,#161414 100%)}
+.feat-card .overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.7) 100%);
+  z-index:1;
+}
+.feat-card .content{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:32px;z-index:2;color:#fff;
+}
+.feat-card .content .cat{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.feat-card .content h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
+.feat-card .content .price{font-size:13px;color:rgba(255,255,255,.6)}
+.feat-card .content .arrow{
+  display:inline-block;width:32px;height:1px;background:var(--gold);
+  margin-top:12px;position:relative;transition:var(--transition);
+}
+.feat-card:hover .content .arrow{width:48px}`
+.feat-card .content .arrow::after{
+  content:'›';position:absolute;right:-2px;top:-9px;color:var(--gold);font-size:18px;
+}
+/* Testimonial */
+.testimonial-strip{
+  background:var(--ink);padding:64px 0;text-align:center;
+}
+.testimonial-strip blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,3.5vw,34px);font-weight:300;font-style:italic;
+  color:rgba(255,255,255,.8);max-width:720px;margin:0 auto;line-height:1.5;
+}
+.testimonial-strip cite{
+  display:block;margin-top:20px;font-size:11px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--gold);font-style:normal;
+}
+/* Newsletter */
+.newsletter{padding:64px 0;text-align:center}
+.newsletter h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:8px}
+.newsletter p{font-size:13px;color:var(--ink-light);margin-bottom:24px}
+.newsletter-form{display:flex;max-width:440px;margin:0 auto;gap:0}
+.newsletter-form input{
+  flex:1;padding:13px 20px;border:1px solid var(--border);background:#fff;
+  font-size:12px;outline:none;transition:var(--transition);
+}
+.newsletter-form input:focus{border-color:var(--gold)}
+.newsletter-form button{background:var(--ink);color:#fff;border:none;padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:var(--transition)}
+.newsletter-form button:hover{background:var(--gold)}
+
+/* ═══════════════ SHOP / PRODUCT LISTING ═══════════════ */
+.shop-header{padding:56px 0 32px}
+.shop-header h1{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300}
+.shop-header p{font-size:13px;color:var(--ink-light);margin-top:6px}
+.shop-layout{display:grid;grid-template-columns:220px 1fr;gap:40px;padding-bottom:80px}
+/* Sidebar Filters */
+.filter-group{margin-bottom:28px}
+.filter-group h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-light);margin-bottom:12px;font-weight:500}
+.filter-item{
+  display:flex;align-items:center;gap:10px;padding:6px 0;
+  font-size:13px;color:var(--ink-soft);cursor:pointer;transition:var(--transition);
+}
+.filter-item:hover{color:var(--gold)}
+.filter-item .check{
+  width:16px;height:16px;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;transition:var(--transition);
+}
+.filter-item.active .check{border-color:var(--gold);background:var(--gold)}
+.filter-item.active .check::after{content:'✓';color:#fff;font-size:10px}
+.filter-item.active{color:var(--ink)}
+.price-range{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-light)}
+/* Product Grid */
+.shop-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.shop-top span{font-size:12px;color:var(--ink-light)}
+.sort-select{
+  padding:8px 32px 8px 12px;border:1px solid var(--border);background:#fff;
+  font-size:11px;outline:none;cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;
+}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.product-card{cursor:pointer;transition:var(--transition)}
+.product-card:hover .p-img-wrap{box-shadow:var(--shadow-hover)}
+.p-img-wrap{
+  background:#eae5df;height:340px;position:relative;overflow:hidden;
+  transition:var(--transition);
+}
+.p-img-inner{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:80px;transition:transform .5s var(--transition);
+}
+.product-card:hover .p-img-inner{transform:scale(1.04)}
+.p-tag{
+  position:absolute;top:12px;left:12px;
+  background:var(--ink);color:#fff;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;padding:4px 10px;z-index:2;
+}
+.p-tag.sale{background:var(--rose)}
+.p-quick{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(26,26,26,.85);color:#fff;
+  padding:11px;text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  transform:translateY(100%);transition:var(--transition);cursor:pointer;
+}
+.product-card:hover .p-quick{transform:translateY(0)}
+.p-info{padding:14px 0 0}
+.p-info .name{font-size:14px;font-weight:400;margin-bottom:3px}
+.p-info .cat{font-size:10px;color:var(--ink-light);letter-spacing:1px;text-transform:uppercase}
+.p-info .price-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+.p-info .price{font-size:15px;font-weight:500;color:var(--ink)}
+.p-info .price-old{font-size:13px;color:var(--ink-light);text-decoration:line-through}
+
+/* ═══════════════ PRODUCT DETAIL ═══════════════ */
+.product-detail-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;padding:48px 0 80px}
+.pd-gallery{display:flex;flex-direction:column;gap:10px}
+.pd-main-img{
+  background:#eae5df;height:460px;display:flex;align-items:center;justify-content:center;
+  font-size:120px;position:relative;overflow:hidden;
+}
+.pd-thumbs{display:flex;gap:8px}
+.pd-thumb{
+  width:72px;height:72px;background:#eae5df;
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;cursor:pointer;border:2px solid transparent;transition:var(--transition);
+}
+.pd-thumb:hover,.pd-thumb.active{border-color:var(--gold)}
+.pd-info .breadcrumb{font-size:11px;color:var(--ink-light);margin-bottom:16px}
+.pd-info .breadcrumb a{cursor:pointer}
+.pd-info .breadcrumb a:hover{color:var(--gold)}
+.pd-info h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1.15;margin-bottom:10px}
+.pd-info .price-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.pd-info .price{font-size:22px;font-weight:500}
+.pd-info .price-old{font-size:16px;color:var(--ink-light);text-decoration:line-through}
+.pd-info .price-save{font-size:11px;color:var(--rose);font-weight:500;letter-spacing:1px;text-transform:uppercase}
+.pd-info .desc{font-size:13px;color:var(--ink-soft);line-height:1.8;margin-bottom:24px}
+.pd-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-light);margin-bottom:10px;font-weight:500}
+/* Size selector */
+.size-row{display:flex;gap:8px;margin-bottom:24px}
+.size-opt{
+  width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--border);font-size:13px;cursor:pointer;transition:var(--transition);
+  background:#fff;
+}
+.size-opt:hover{border-color:var(--ink)}
+.size-opt.active{border-color:var(--ink);background:var(--ink);color:#fff}
+/* Color selector */
+.color-row{display:flex;gap:10px;margin-bottom:28px}
+.color-opt{
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+  border:2.5px solid transparent;transition:var(--transition);
+}
+.color-opt:hover,.color-opt.active{border-color:var(--ink);outline:2px solid var(--border);outline-offset:2px}
+/* Reviews mini */
+.reviews-mini{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.review-item{display:flex;gap:14px;margin-bottom:16px}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;flex-shrink:0}
+.review-item .stars{color:var(--gold);font-size:12px;margin-bottom:2px}
+.review-item .text{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.review-item .author{font-size:11px;color:var(--ink-light)}
+
+/* ═══════════════ CART ═══════════════ */
+.cart-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;padding:48px 0 80px}
+.cart-header{margin-bottom:28px}
+.cart-header h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300}
+.cart-item{
+  display:flex;align-items:center;gap:20px;
+  padding:20px 0;border-bottom:1px solid var(--border);
+}
+.cart-item .ci-img{
+  width:90px;height:110px;background:#eae5df;
+  display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;
+}
+.cart-item .ci-info{flex:1}
+.cart-item .ci-info h4{font-size:15px;font-weight:400;margin-bottom:3px}
+.cart-item .ci-info p{font-size:11px;color:var(--ink-light);text-transform:uppercase;letter-spacing:1px}
+.cart-item .ci-price{font-size:16px;font-weight:500;margin-left:auto}
+.qty-ctrl{display:flex;align-items:center;gap:0;border:1px solid var(--border)}
+.qty-btn{
+  width:32px;height:32px;background:#fff;border:none;cursor:pointer;
+  font-size:16px;color:var(--ink-soft);transition:var(--transition);display:flex;align-items:center;justify-content:center;
+}
+.qty-btn:hover{background:var(--ink);color:#fff}
+.qty-val{width:36px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;background:#fff}
+.remove-link{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);cursor:pointer;transition:var(--transition);margin-top:8px;display:inline-block}
+.remove-link:hover{color:var(--rose)}
+/* Cart Summary */
+.cart-summary{background:#fff;padding:32px;border:1px solid var(--border)}
+.cart-summary h3{font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;font-weight:500}
+.cs-row{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;color:var(--ink-soft)}
+.cs-row.total{font-size:17px;font-weight:500;color:var(--ink);border-top:1px solid var(--border);margin-top:12px;padding-top:14px}
+.cs-row .green{color:var(--gold);font-weight:500}
+.promo-input{display:flex;gap:0;margin:20px 0}
+.promo-input input{flex:1;padding:10px 14px;border:1px solid var(--border);font-size:12px;outline:none}
+.promo-input input:focus{border-color:var(--gold)}
+.promo-input button{background:var(--ink);color:#fff;border:none;padding:10px 18px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}
+
+/* ═══════════════ CHECKOUT ═══════════════ */
+.checkout-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;padding:48px 0 80px}
+.checkout-section{margin-bottom:32px}
+.checkout-section h3{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px;font-weight:500;color:var(--ink)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.form-group label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);font-weight:500}
+.form-group input,.form-group select{
+  padding:11px 14px;border:1px solid var(--border);background:#fff;
+  font-size:13px;outline:none;transition:var(--transition);
+}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+.pay-method{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+  border:1.5px solid var(--border);cursor:pointer;transition:var(--transition);
+  margin-bottom:8px;background:#fff;
+}
+.pay-method:hover{border-color:var(--ink-soft)}
+.pay-method.active{border-color:var(--gold);background:#faf8f5}
+.pay-method .emoji{font-size:20px}
+.pay-method .pm-info h4{font-size:13px;font-weight:500}
+.pay-method .pm-info p{font-size:11px;color:var(--ink-light)}
+.secure-note{font-size:11px;color:var(--ink-light);text-align:center;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* ═══════════════ ORDER SUCCESS ═══════════════ */
+.success-wrap{
+  max-width:520px;margin:100px auto;text-align:center;padding:0 24px;
+}
+.success-icon{
+  width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;font-size:36px;color:#fff;
+}
+.success-wrap h1{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;margin-bottom:8px}
+.success-wrap p{font-size:13px;color:var(--ink-light);margin-bottom:6px}
+.order-id{font-size:12px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:28px}
+.success-details{
+  background:#fff;border:1px solid var(--border);padding:24px;text-align:left;margin-bottom:28px;
+}
+.sd-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border)}
+.sd-row:last-child{border-bottom:none}
+
+/* ═══════════════ LOGIN / REGISTER ═══════════════ */
+.auth-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 68px)}
+.auth-visual{
+  background:var(--ink);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.auth-visual .av-accent{
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);
+  position:absolute;
+}
+.auth-visual h2{
+  font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;
+  color:#fff;position:relative;z-index:1;text-align:center;padding:0 40px;line-height:1.2;
+}
+.auth-visual h2 em{color:var(--gold-light);font-style:italic}
+.auth-form-wrap{display:flex;align-items:center;justify-content:center;padding:60px 48px}
+.auth-box{width:100%;max-width:380px}
+.auth-box .logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:5px;text-transform:uppercase;margin-bottom:32px}
+.auth-tabs{display:flex;gap:24px;margin-bottom:28px;border-bottom:1px solid var(--border);padding-bottom:0}
+.auth-tab{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  padding-bottom:12px;color:var(--ink-light);border:none;background:none;
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:var(--transition);
+}
+.auth-tab.active{color:var(--ink);border-bottom-color:var(--gold)}
+.auth-box .form-group{margin-bottom:16px}
+.or-line{display:flex;align-items:center;gap:12px;margin:20px 0;font-size:11px;color:var(--ink-light)}
+.or-line::before,.or-line::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ═══════════════ ABOUT ═══════════════ */
+.about-hero{
+  height:360px;background:var(--ink);display:flex;align-items:flex-end;
+  position:relative;overflow:hidden;
+}
+.about-hero .ah-accent{
+  position:absolute;right:-100px;bottom:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.1) 0%,transparent 70%);
+}
+.about-hero .content{position:relative;z-index:1;padding:48px 40px;max-width:1140px;margin:0 auto;width:100%}
+.about-hero h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:#fff}
+.about-hero p{font-size:14px;color:rgba(255,255,255,.5);margin-top:8px;max-width:480px}
+.about-story{padding:72px 0;max-width:700px;margin:0 auto;text-align:center}
+.about-story h2{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:20px}
+.about-story p{font-size:14px;color:var(--ink-soft);line-height:1.9;margin-bottom:16px}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:72px}
+.value-card{background:#fff;border:1px solid var(--border);padding:32px 24px;text-align:center}
+.value-card .icon{font-size:28px;margin-bottom:14px}
+.value-card h4{font-size:13px;font-weight:500;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
+.value-card p{font-size:12px;color:var(--ink-light);line-height:1.7}
+/* Leadership */
+.leadership{padding:0 0 72px}
+.leadership h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:32px;text-align:center}
+.leaders-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.leader-card{text-align:center}
+.leader-photo{
+  width:100%;aspect-ratio:3/4;background:var(--cream-dark);
+  display:flex;align-items:center;justify-content:center;
+  font-size:60px;margin-bottom:16px;
+}
+.leader-card h4{font-size:14px;font-weight:500;margin-bottom:3px}
+.leader-card p{font-size:11px;color:var(--ink-light);letter-spacing:1px;text-transform:uppercase}
+
+/* ═══════════════ CONTACT ═══════════════ */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:64px 0 80px}
+.contact-info h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:12px}
+.contact-info>p{font-size:13px;color:var(--ink-light);margin-bottom:32px;line-height:1.7}
+.ci-item{display:flex;gap:16px;margin-bottom:24px}
+.ci-item .icon{width:40px;height:40px;background:var(--cream-dark);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ci-item .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);margin-bottom:2px;font-weight:500}
+.ci-item .val{font-size:14px;color:var(--ink)}
+.contact-form h3{font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;font-weight:500}
+.contact-form textarea{
+  width:100%;padding:12px 14px;border:1px solid var(--border);
+  font-size:13px;resize:vertical;min-height:120px;outline:none;transition:var(--transition);background:#fff;
+}
+.contact-form textarea:focus{border-color:var(--gold)}
+
+/* ═══════════════ FAQ ═══════════════ */
+.faq-wrap{max-width:720px;margin:0 auto;padding:64px 0 80px}
+.faq-wrap h1{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;margin-bottom:8px}
+.faq-wrap>p{font-size:13px;color:var(--ink-light);margin-bottom:36px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:18px 0;background:none;border:none;cursor:pointer;text-align:left;
+  transition:var(--transition);
+}
+.faq-q:hover{padding-left:8px}
+.faq-q span{font-size:14px;font-weight:400;color:var(--ink)}
+.faq-q .arrow{font-size:16px;color:var(--ink-light);transition:var(--transition)}
+.faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:13px;color:var(--ink-soft);line-height:1.7}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:18px}
+
+/* ═══════════════ POLICIES ═══════════════ */
+.policy-wrap{max-width:760px;margin:0 auto;padding:64px 0 80px}
+.policy-wrap h1{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;margin-bottom:6px}
+.policy-wrap .meta{font-size:11px;color:var(--ink-light);margin-bottom:40px}
+.policy-section{margin-bottom:36px}
+.policy-section h3{font-size:15px;font-weight:500;margin-bottom:10px}
+.policy-section p{font-size:13px;color:var(--ink-soft);line-height:1.8;margin-bottom:10px}
+.policy-section ul{padding-left:20px;margin-bottom:10px}
+.policy-section ul li{font-size:13px;color:var(--ink-soft);line-height:2}
+.policy-tabs{display:flex;gap:0;margin-bottom:40px;border-bottom:1px solid var(--border)}
+.policy-tab{
+  padding:14px 24px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;border:none;background:none;color:var(--ink-light);transition:var(--transition);
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.policy-tab:hover{color:var(--ink)}
+.policy-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer{background:var(--ink);color:rgba(255,255,255,.5);padding:64px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-grid .logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:5px;color:#fff;margin-bottom:12px}
+.footer-grid p{font-size:12px;line-height:1.8;max-width:260px}
+footer h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;font-weight:500}
+footer a{display:block;font-size:13px;color:rgba(255,255,255,.45);margin-bottom:9px;cursor:pointer;transition:var(--transition)}
+footer a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:11px}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:900px){
+  .shop-layout{grid-template-columns:1fr}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .featured-grid{grid-template-columns:1fr 1fr;height:auto}
+  .feat-card{height:260px}
+  .product-detail-layout{grid-template-columns:1fr}
+  .cart-layout{grid-template-columns:1fr}
+  .checkout-layout{grid-template-columns:1fr}
+  .auth-layout{grid-template-columns:1fr}
+  .auth-visual{display:none}
+  .contact-layout{grid-template-columns:1fr}
+  .leaders-grid{grid-template-columns:1fr 1fr}
+  .values-grid{grid-template-columns:1fr}
+  nav{padding:0 20px}
+  .nav-left .nav-link:nth-child(n+3){display:none}
+}
+@media(max-width:600px){
+  .product-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .p-img-wrap{height:220px}
+  .cat-strip-item{padding:14px 18px;font-size:9px}
+  .featured-grid{grid-template-columns:1fr}
+  .feat-card{height:240px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-left .nav-link{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-left">
+    <span class="nav-link active" onclick="showPage('home')">Home</span>
+    <span class="nav-link" onclick="showPage('shop')">Shop</span>
+    <span class="nav-link" onclick="showPage('about')">About</span>
+    <span class="nav-link" onclick="showPage('contact')">Contact</span>
+  </div>
+  <div class="nav-logo" onclick="showPage('home')">MAISON</div>
+  <div class="nav-right">
+    <span class="nav-link" onclick="showPage('login')">Account</span>
+    <span class="nav-cart" onclick="showPage('cart')">Bag <span class="cart-badge">3</span></span>
+  </div>
+</nav>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content">
+      <span class="label-upper">Spring / Summer 2026</span>
+      <h1>Redefine<br/><em>Elegance</em></h1>
+      <p>A curated collection where timeless craftsmanship meets modern sensibility. Pieces that transcend seasons.</p>
+      <button class="btn btn-gold" onclick="showPage('shop')">Explore Collection</button>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="line"></div></div>
+  </div>
+
+  <!-- Category Strip -->
+  <div class="cat-strip">
+    <div class="cat-strip-item" onclick="showPage('shop')">Women</div>
+    <div class="cat-strip-item" onclick="showPage('shop')">Men</div>
+    <div class="cat-strip-item" onclick="showPage('shop')">Kids</div>
+    <div class="cat-strip-item" onclick="showPage('shop')">Accessories</div>
+    <div class="cat-strip-item" onclick="showPage('shop')">New In</div>
+  </div>
+
+  <!-- Featured -->
+  <div class="container section-pad">
+    <div style="text-align:center;margin-bottom:40px">
+      <span class="label-upper">Featured</span>
+      <h2 class="serif-title" style="font-size:36px;margin-top:8px">The Edit</h2>
+    </div>
+    <div class="featured-grid">
+      <div class="feat-card" onclick="showPage('product')">
+        <div class="bg bg-1"></div><div class="overlay"></div>
+        <div class="content"><div class="cat">Women</div><h3>Silk Midi Dress</h3><div class="price">₹12,400</div><div class="arrow"></div></div>
+      </div>
+      <div class="feat-card" onclick="showPage('product')">
+        <div class="bg bg-2"></div><div class="overlay"></div>
+        <div class="content"><div class="cat">Men</div><h3>Wool Overcoat</h3><div class="price">₹18,900</div><div class="arrow"></div></div>
+      </div>
+      <div class="feat-card" onclick="showPage('product')">
+        <div class="bg bg-3"></div><div class="overlay"></div>
+        <div class="content"><div class="cat">Accessories</div><h3>Leather Tote</h3><div class="price">₹8,200</div><div class="arrow"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonial -->
+  <div class="testimonial-strip">
+    <div class="container">
+      <blockquote>"MAISON doesn't just make clothing — it crafts an identity. Every stitch tells a story of intention."</blockquote>
+      <cite>— Vogue India, 2025</cite>
+    </div>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="container">
+    <div class="newsletter">
+      <span class="label-upper">Stay in the loop</span>
+      <h2>Join the MAISON Circle</h2>
+      <p>Exclusive drops, early access, and curated style notes — delivered quarterly.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address"/>
+        <button>Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SHOP ═══════════ -->
+<div id="page-shop" class="page">
+  <div class="container">
+    <div class="shop-header">
+      <span class="label-upper">Collections</span>
+      <h1>Shop All</h1>
+      <p>78 pieces available</p>
+    </div>
+    <div class="shop-layout">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="filter-group">
+          <h4>Category</h4>
+          <div class="filter-item active" onclick="toggleFilter(this)"><div class="check"></div>All</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>Dresses</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>Tops</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>Trousers</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>Outerwear</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>Accessories</div>
+        </div>
+        <div class="filter-group">
+          <h4>Size</h4>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>XS</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>S</div>
+          <div class="filter-item active" onclick="toggleFilter(this)"><div class="check"></div>M</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>L</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>XL</div>
+        </div>
+        <div class="filter-group">
+          <h4>Price</h4>
+          <div class="price-range">₹0 — ₹50,000</div>
+          <input type="range" style="width:100%;margin-top:8px;accent-color:var(--gold);" value="30000" min="0" max="50000"/>
+        </div>
+        <div class="filter-group">
+          <h4>Rating</h4>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>★★★★★ (5)</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>★★★★☆ (4+)</div>
+          <div class="filter-item" onclick="toggleFilter(this)"><div class="check"></div>★★★☆☆ (3+)</div>
+        </div>
+      </div>
+      <!-- Products -->
+      <div>
+        <div class="shop-top">
+          <span>78 products</span>
+          <select class="sort-select">
+            <option>Sort: Featured</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest First</option>
+            <option>Best Rated</option>
+          </select>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PRODUCT DETAIL ═══════════ -->
+<div id="page-product" class="page">
+  <div class="container">
+    <div class="product-detail-layout">
+      <div class="pd-gallery">
+        <div class="pd-main-img">👗</div>
+        <div class="pd-thumbs">
+          <div class="pd-thumb active">👗</div>
+          <div class="pd-thumb">👗</div>
+          <div class="pd-thumb">👗</div>
+          <div class="pd-thumb">👗</div>
+        </div>
+      </div>
+      <div class="pd-info">
+        <div class="breadcrumb"><a onclick="showPage('shop')">Shop</a> › Women › Dresses</div>
+        <span class="label-upper">New Arrival</span>
+        <h1>Silk Charmeuse<br/>Midi Dress</h1>
+        <div class="price-row">
+          <span class="price">₹12,400</span>
+          <span class="price-old">₹15,800</span>
+          <span class="price-save">Save 21%</span>
+        </div>
+        <p class="desc">An effortless silhouette rendered in liquid silk charmeuse. The bias cut drapes fluidly against the body, while the subtle cowl neckline adds a touch of quiet drama. Perfect for evening or elevated daywear.</p>
+        <div class="pd-label">Size</div>
+        <div class="size-row">
+          <div class="size-opt">XS</div>
+          <div class="size-opt">S</div>
+          <div class="size-opt active">M</div>
+          <div class="size-opt">L</div>
+          <div class="size-opt">XL</div>
+        </div>
+        <div class="pd-label">Colour</div>
+        <div class="color-row">
+          <div class="color-opt active" style="background:#2c2420"></div>
+          <div class="color-opt" style="background:#8b7355"></div>
+          <div class="color-opt" style="background:#c9a96e"></div>
+          <div class="color-opt" style="background:#4a5568"></div>
+        </div>
+        <button class="btn btn-dark" style="width:100%;" onclick="showPage('cart')">Add to Bag</button>
+        <p style="font-size:11px;color:var(--ink-light);margin-top:12px;text-align:center">Free shipping on orders over ₹5,000</p>
+        <!-- Reviews -->
+        <div class="reviews-mini">
+          <div class="pd-label">Customer Reviews</div>
+          <div class="review-item">
+            <div class="review-avatar">A</div>
+            <div><div class="stars">★★★★★</div><div class="text">Absolutely stunning. The fabric feels luxurious and the fit is impeccable.</div><div class="author">Ananya R. · Mumbai</div></div>
+          </div>
+          <div class="review-item">
+            <div class="review-avatar">P</div>
+            <div><div class="stars">★★★★☆</div><div class="text">Beautiful piece. Runs slightly small — I'd recommend sizing up.</div><div class="author">Priya M. · Delhi</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CART ═══════════ -->
+<div id="page-cart" class="page">
+  <div class="container">
+    <div class="cart-layout">
+      <div>
+        <div class="cart-header">
+          <span class="label-upper">Your Selection</span>
+          <h1>Shopping Bag</h1>
+        </div>
+        <div class="cart-item">
+          <div class="ci-img">👗</div>
+          <div class="ci-info">
+            <h4>Silk Charmeuse Midi Dress</h4>
+            <p>Size M · Charcoal</p>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px">
+              <div class="qty-ctrl"><button class="qty-btn">−</button><div class="qty-val">1</div><button class="qty-btn">+</button></div>
+              <span class="remove-link">Remove</span>
+            </div>
+          </div>
+          <div class="ci-price">₹12,400</div>
+        </div>
+        <div class="cart-item">
+          <div class="ci-img">🧥</div>
+          <div class="ci-info">
+            <h4>Wool Blend Overcoat</h4>
+            <p>Size L · Camel</p>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px">
+              <div class="qty-ctrl"><button class="qty-btn">−</button><div class="qty-val">1</div><button class="qty-btn">+</button></div>
+              <span class="remove-link">Remove</span>
+            </div>
+          </div>
+          <div class="ci-price">₹18,900</div>
+        </div>
+        <div class="cart-item">
+          <div class="ci-img">👜</div>
+          <div class="ci-info">
+            <h4>Structured Leather Tote</h4>
+            <p>Black · One Size</p>
+            <div style="display:flex;align-items:center;gap:16px;margin-top:10px">
+              <div class="qty-ctrl"><button class="qty-btn">−</button><div class="qty-val">1</div><button class="qty-btn">+</button></div>
+              <span class="remove-link">Remove</span>
+            </div>
+          </div>
+          <div class="ci-price">₹8,200</div>
+        </div>
+      </div>
+      <!-- Summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="cs-row"><span>Subtotal (3 items)</span><span>₹39,500</span></div>
+        <div class="cs-row"><span>Shipping</span><span class="green">Free</span></div>
+        <div class="cs-row"><span>Discount (MAISON10)</span><span class="green">−₹3,950</span></div>
+        <div class="cs-row total"><span>Total</span><span>₹35,550</span></div>
+        <div class="promo-input">
+          <input type="text" placeholder="Promo code"/>
+          <button>Apply</button>
+        </div>
+        <button class="btn btn-dark" style="width:100%;" onclick="showPage('checkout')">Proceed to Checkout</button>
+        <div class="secure-note">🔒 Secure checkout · SSL encrypted</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CHECKOUT ═══════════ -->
+<div id="page-checkout" class="page">
+  <div class="container">
+    <div style="padding:48px 0 0">
+      <span class="label-upper">Final Step</span>
+      <h1 class="serif-title" style="font-size:38px;margin-top:6px">Checkout</h1>
+    </div>
+    <div class="checkout-layout">
+      <div>
+        <div class="checkout-section">
+          <h3>📍 Shipping Address</h3>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" placeholder="Rahul"/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Kumar"/></div>
+          </div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="rahul@email.com"/></div>
+          <div class="form-group"><label>Address</label><input type="text" placeholder="123, MG Road, Apt 4B"/></div>
+          <div class="form-row">
+            <div class="form-group"><label>City</label><input type="text" placeholder="Bhubaneswar"/></div>
+            <div class="form-group"><label>Pincode</label><input type="text" placeholder="751001"/></div>
+          </div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"/></div>
+        </div>
+        <div class="checkout-section">
+          <h3>💳 Payment Method</h3>
+          <div class="pay-method active" onclick="selectPay(this)">
+            <span class="emoji">📱</span>
+            <div class="pm-info"><h4>UPI</h4><p>Google Pay · PhonePe · Paytm</p></div>
+          </div>
+          <div class="pay-method" onclick="selectPay(this)">
+            <span class="emoji">💳</span>
+            <div class="pm-info"><h4>Credit / Debit Card</h4><p>Visa · Mastercard · RuPay</p></div>
+          </div>
+          <div class="pay-method" onclick="selectPay(this)">
+            <span class="emoji">💵</span>
+            <div class="pm-info"><h4>Cash on Delivery</h4><p>Pay when you receive</p></div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: Summary -->
+      <div>
+        <div class="cart-summary" style="position:sticky;top:90px">
+          <h3>Order Summary</h3>
+          <div class="cs-row"><span>👗 Silk Midi Dress</span><span>₹12,400</span></div>
+          <div class="cs-row"><span>🧥 Wool Overcoat</span><span>₹18,900</span></div>
+          <div class="cs-row"><span>👜 Leather Tote</span><span>₹8,200</span></div>
+          <div class="divider"></div>
+          <div class="cs-row"><span>Subtotal</span><span>₹39,500</span></div>
+          <div class="cs-row"><span>Shipping</span><span class="green">Free</span></div>
+          <div class="cs-row"><span>Discount</span><span class="green">−₹3,950</span></div>
+          <div class="cs-row total"><span>Total</span><span>₹35,550</span></div>
+          <button class="btn btn-dark" style="width:100%;margin-top:20px;" onclick="showPage('success')">Place Order</button>
+          <div class="secure-note" style="margin-top:14px">🔒 Your payment is secure & encrypted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ORDER SUCCESS ═══════════ -->
+<div id="page-success" class="page">
+  <div class="success-wrap">
+    <div class="success-icon">✓</div>
+    <h1>Thank You</h1>
+    <p>Your order has been placed successfully.</p>
+    <div class="order-id">Order #MSN-20260131-4729</div>
+    <div class="success-details">
+      <div class="sd-row"><span>Order Total</span><span style="font-weight:600">₹35,550</span></div>
+      <div class="sd-row"><span>Payment</span><span>UPI — Google Pay</span></div>
+      <div class="sd-row"><span>Estimated Delivery</span><span>Feb 3 – 5, 2026</span></div>
+      <div class="sd-row"><span>Shipping To</span><span style="font-size:12px;color:var(--ink-light)">123 MG Road, Bhubaneswar</span></div>
+    </div>
+    <button class="btn btn-dark" onclick="showPage('home')">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ═══════════ LOGIN ═══════════ -->
+<div id="page-login" class="page" style="padding-top:0">
+  <div class="auth-layout">
+    <div class="auth-visual">
+      <div class="av-accent" style="top:10%;left:-10%"></div>
+      <div class="av-accent" style="bottom:-15%;right:-5%;width:300px;height:300px"></div>
+      <h2>Dress with<br/><em>Intention</em></h2>
+    </div>
+    <div class="auth-form-wrap">
+      <div class="auth-box">
+        <div class="logo">MAISON</div>
+        <div class="auth-tabs">
+          <button class="auth-tab active">Sign In</button>
+          <button class="auth-tab">Create Account</button>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"/></div>
+        <button class="btn btn-dark" style="width:100%;margin-top:8px;" onclick="showPage('home')">Sign In</button>
+        <div class="or-line">or</div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;">Continue with Google</button>
+        <p style="font-size:11px;color:var(--ink-light);text-align:center;margin-top:20px">Forgot password? <a style="color:var(--gold);cursor:pointer">Reset here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<div id="page-about" class="page" style="padding-top:0">
+  <div class="about-hero">
+    <div class="ah-accent"></div>
+    <div class="content">
+      <span class="label-upper">Est. 2018</span>
+      <h1>About MAISON</h1>
+      <p>A house of fashion built on quiet craftsmanship, timeless design, and an unwavering commitment to quality.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="about-story">
+      <span class="label-upper">Our Story</span>
+      <h2>Born from a belief that true luxury is quiet</h2>
+      <p>MAISON was founded in 2018 in the creative heart of Mumbai — a studio where skilled artisans and modern designers collaborate to produce clothing that transcends trend cycles. Every piece is designed with intention: from the sourcing of sustainably-grown fabrics to the final stitch by hand.</p>
+      <p>We don't follow fashion. We create a wardrobe that ages beautifully — pieces you'll reach for season after season.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><div class="icon">🌿</div><h4>Sustainable</h4><p>100% ethically sourced materials and carbon-neutral shipping across India.</p></div>
+      <div class="value-card"><div class="icon">✂️</div><h4>Handcrafted</h4><p>Each garment is stitched by master artisans in our Mumbai atelier.</p></div>
+      <div class="value-card"><div class="icon">♾️</div><h4>Timeless</h4><p>Designed to outlast seasons. Invest in pieces that define your style.</p></div>
+    </div>
+    <div class="leadership">
+      <h2>Leadership</h2>
+      <div class="leaders-grid">
+        <div class="leader-card"><div class="leader-photo">👨‍💼</div><h4>Arjun Mehta</h4><p>Founder & Chairman</p></div>
+        <div class="leader-card"><div class="leader-photo">👩‍💼</div><h4>Nisha Kapoor</h4><p>Creative Director</p></div>
+        <div class="leader-card"><div class="leader-photo">👨‍💼</div><h4>Vikram Shah</h4><p>Managing Director</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<div id="page-contact" class="page">
+  <div class="container">
+    <div style="padding:48px 0 0"><span class="label-upper">Reach Us</span><h1 class="serif-title" style="font-size:38px;margin-top:6px">Contact</h1></div>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h2>We'd love to hear from you</h2>
+        <p>Whether it's a styling question, an order inquiry, or just a hello — our team is here to help.</p>
+        <div class="ci-item"><div class="icon">📞</div><div><div class="label">Phone</div><div class="val">+91 98765 43210</div></div></div>
+        <div class="ci-item"><div class="icon">📧</div><div><div class="label">Email</div><div class="val">hello@maison.in</div></div></div>
+        <div class="ci-item"><div class="icon">📍</div><div><div class="label">Atelier</div><div class="val">42, Bandra West, Mumbai 400050</div></div></div>
+        <div class="ci-item"><div class="icon">🕐</div><div><div class="label">Hours</div><div class="val">Mon – Sat, 10 AM – 8 PM</div></div></div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <div class="form-group"><label>Name</label><input type="text" placeholder="Your full name"/></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+        <div class="form-group"><label>Subject</label><input type="text" placeholder="How can we help?"/></div>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us more…"></textarea></div>
+        <button class="btn btn-dark">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<div id="page-faq" class="page">
+  <div class="container">
+    <div class="faq-wrap">
+      <span class="label-upper">Help</span>
+      <h1>Frequently Asked<br/>Questions</h1>
+      <p>Everything you need to know about shopping with MAISON.</p>
+      <div id="faqList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ POLICIES ═══════════ -->
+<div id="page-policies" class="page">
+  <div class="container">
+    <div class="policy-wrap">
+      <div class="policy-tabs">
+        <button class="policy-tab active" onclick="showPolicy('returns')">Returns & Refunds</button>
+        <button class="policy-tab" onclick="showPolicy('privacy')">Privacy Policy</button>
+        <button class="policy-tab" onclick="showPolicy('terms')">Terms & Conditions</button>
+      </div>
+      <div id="policy-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">MAISON</div>
+        <p>A house of quiet luxury. Timeless pieces, crafted with intention in Mumbai, India.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a onclick="showPage('shop')">All Collections</a>
+        <a onclick="showPage('shop')">Women</a>
+        <a onclick="showPage('shop')">Men</a>
+        <a onclick="showPage('shop')">Accessories</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('contact')">Contact</a>
+        <a onclick="showPage('faq')">FAQ</a>
+        <a onclick="showPage('policies')">Policies</a>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a>Instagram</a>
+        <a>Pinterest</a>
+        <a>Twitter</a>
+        <a>LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 MAISON. All rights reserved.</p>
+      <p style="font-size:11px">Designed with care · Mumbai, India</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+// ─── PRODUCTS DATA ───
+const products = [
+  {name:"Silk Charmeuse Midi Dress",cat:"Women · Dresses",price:"₹12,400",old:"₹15,800",emoji:"👗",tag:"Sale"},
+  {name:"Wool Blend Overcoat",cat:"Men · Outerwear",price:"₹18,900",old:"",emoji:"🧥",tag:"New"},
+  {name:"Structured Leather Tote",cat:"Accessories · Bags",price:"₹8,200",old:"",emoji:"👜",tag:""},
+  {name:"Linen Relaxed Trousers",cat:"Men · Trousers",price:"₹6,800",old:"₹8,400",emoji:"👖",tag:"Sale"},
+  {name:"Cashmere Knit Sweater",cat:"Women · Tops",price:"₹14,200",old:"",emoji:"🧶",tag:"New"},
+  {name:"Cotton Oxford Shirt",cat:"Men · Tops",price:"₹4,900",old:"",emoji:"👔",tag:""},
+  {name:"Silk Scarf",cat:"Accessories · Scarves",price:"₹3,200",old:"₹4,100",emoji:"🧣",tag:"Sale"},
+  {name:"Tailored Blazer",cat:"Women · Outerwear",price:"₹16,500",old:"",emoji:"🧥",tag:"New"},
+  {name:"Leather Belt",cat:"Accessories · Belts",price:"₹2,800",old:"",emoji:"🪢",tag:""},
+];
+
+// ─── RENDER PRODUCTS ───
+(function(){
+  const grid = document.getElementById('productGrid');
+  products.forEach(p => {
+    grid.innerHTML += `
+      <div class="product-card" onclick="showPage('product')">
+        <div class="p-img-wrap">
+          <div class="p-img-inner">${p.emoji}</div>
+          ${p.tag ? `<div class="p-tag ${p.tag==='Sale'?'sale':''}">${p.tag}</div>` : ''}
+          <div class="p-quick" onclick="event.stopPropagation();alert('Added to bag!')">Add to Bag</div>
+        </div>
+        <div class="p-info">
+          <div class="cat">${p.cat}</div>
+          <div class="name">${p.name}</div>
+          <div class="price-row">
+            <span class="price">${p.price}</span>
+            ${p.old ? `<span class="price-old">${p.old}</span>` : ''}
+          </div>
+        </div>
+      </div>`;
+  });
+})();
+
+// ─── FAQ DATA ───
+const faqs = [
+  {q:"What is your return policy?",a:"We accept returns within 14 days of delivery. Items must be unworn, unaltered, and in original packaging. Simply initiate a return from your account dashboard."},
+  {q:"How long does shipping take?",a:"Standard delivery across India takes 3–5 business days. Express delivery (1–2 days) is available for select cities at checkout."},
+  {q:"Do you ship internationally?",a:"Currently we ship within India only. International shipping will be available soon — sign up for our newsletter to be notified."},
+  {q:"How do I find my size?",a:"Each product page includes a detailed size guide. We recommend measuring your bust, waist, and hips for the most accurate fit. When in doubt, size up."},
+  {q:"Can I exchange my order?",a:"Yes, exchanges are available for a different size or colour of the same item. Initiate an exchange within 14 days of receiving your order."},
+  {q:"What payment methods do you accept?",a:"We accept UPI (Google Pay, PhonePe, Paytm), all major credit and debit cards, net banking, and cash on delivery for orders under ₹15,000."},
+  {q:"Are your products authentic?",a:"Every MAISON piece is designed and crafted in our Mumbai atelier. We guarantee 100% authenticity on all items sold through our official website."},
+  {q:"How do I care for my MAISON pieces?",a:"Each garment comes with a care label. Generally, we recommend dry cleaning for silk and wool pieces, and gentle machine wash for cotton and linen."},
+  {q:"Can I modify my order after placing it?",a:"Orders can be modified within 2 hours of placement. After that, the order enters our production/packing process. Please contact us immediately if needed."},
+  {q:"How do I contact customer support?",a:"Reach us at hello@maison.in or call +91 98765 43210 (Mon–Sat, 10 AM–8 PM). We typically respond within 4 business hours."},
+];
+
+(function(){
+  const list = document.getElementById('faqList');
+  faqs.forEach((f,i) => {
+    list.innerHTML += `
+      <div class="faq-item" id="faq-${i}">
+        <button class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="arrow">▼</span></button>
+        <div class="faq-a">${f.a}</div>
+      </div>`;
+  });
+})();
+
+function toggleFaq(i){
+  const item = document.getElementById('faq-'+i);
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!open) item.classList.add('open');
+}
+
+// ─── POLICIES DATA ───
+const policies = {
+  returns: {
+    title:"Returns & Refund Policy",
+    updated:"Last updated: January 2026",
+    sections:[
+      {h:"Eligibility",p:"Items must be returned within 14 days of delivery. All items must be in their original condition — unworn, unwashed, unaltered, with all tags attached and in original packaging."},
+      {h:"How to Initiate",p:"Log into your MAISON account → Go to Order History → Select the order → Click 'Request Return'. Our team will review and approve within 48 hours."},
+      {h:"Refund Timeline",p:"Once your returned item is received and inspected, the refund will be processed within 5–7 business days to your original payment method."},
+      {h:"Non-Returnable Items",p:"Final sale items, gift cards, and customised pieces cannot be returned or exchanged. Please check product details before purchasing."},
+    ]
+  },
+  privacy:{
+    title:"Privacy Policy",
+    updated:"Last updated: January 2026",
+    sections:[
+      {h:"Information We Collect",p:"We collect information you provide directly — such as name, email, address, and payment details — to process orders and improve your experience."},
+      {h:"How We Use Your Data",p:"Your data is used to fulfil orders, send order confirmations, and (with your consent) share curated marketing communications. We never sell your data to third parties."},
+      {h:"Security",p:"We use industry-standard SSL encryption and secure payment gateways. Your financial information is never stored on our servers."},
+      {h:"Your Rights",p:"You may request access, correction, or deletion of your personal data at any time by contacting our support team at hello@maison.in."},
+    ]
+  },
+  terms:{
+    title:"Terms & Conditions",
+    updated:"Last updated: January 2026",
+    sections:[
+      {h:"Acceptance",p:"By using the MAISON website, you agree to these Terms & Conditions. If you disagree, please discontinue use of our platform."},
+      {h:"Intellectual Property",p:"All content on the MAISON website — including designs, images, and text — is the property of MAISON and is protected under applicable intellectual property laws."},
+      {h:"Limitation of Liability",p:"MAISON shall not be liable for any indirect, incidental, or consequential damages arising from the use of our products or services."},
+      {h:"Governing Law",p:"These terms are governed by and shall be construed in accordance with the laws of the State of Maharashtra, India."},
+    ]
+  }
+};
+
+function showPolicy(key){
+  document.querySelectorAll('.policy-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  const p = policies[key];
+  let html = `<h1 class="serif-title" style="font-size:36px;margin-bottom:4px">${p.title}</h1><p class="meta">${p.updated}</p>`;
+  p.sections.forEach(s => { html += `<div class="policy-section"><h3>${s.h}</h3><p>${s.p}</p></div>`; });
+  document.getElementById('policy-content').innerHTML = html;
+}
+showPolicy('returns'); // default load
+
+// ─── PAGE NAVIGATION ───
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+id);
+  if(target){ target.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  // nav active state
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const map = {home:0,shop:1,about:2,contact:3};
+  if(map[id]!==undefined) document.querySelectorAll('.nav-link')[map[id]].classList.add('active');
+}
+
+// ─── FILTER TOGGLE ───
+function toggleFilter(el){
+  el.classList.toggle('active');
+}
+
+// ─── SIZE TOGGLE ───
+document.querySelectorAll('.size-opt').forEach(s=>{
+  s.addEventListener('click',function(){
+    document.querySelectorAll('.size-opt').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ─── COLOR TOGGLE ───
+document.querySelectorAll('.color-opt').forEach(c=>{
+  c.addEventListener('click',function(){
+    document.querySelectorAll('.color-opt').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ─── PAYMENT TOGGLE ───
+function selectPay(el){
+  document.querySelectorAll('.pay-method').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── AUTH TABS ───
+document.querySelectorAll('.auth-tab').forEach(t=>{
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.auth-tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ─── THUMBNAIL TOGGLE ───
+document.querySelectorAll('.pd-thumb').forEach(t=>{
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.pd-thumb').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
